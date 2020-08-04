@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@700&display=swap');
+.App{
+  background-color: #F7FCFF;
+  height: 100vh;
+}
+nav {
+  color: #ffffff;
+  background-color:#004D40;
+  text-align: center;
+  padding: 1em 0;
+  font-size: 3em;
+  font-family: 'Kalam', cursive;
+}
+ul{ 
+  margin-top: 2em;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+ul li{
+  text-align: center;
+  padding: 1em 0;
+ }
+ul > li h3 {
+  display: inline-block;
+}
+ul> li button{
+  margin-left: 10px;
+  border :none;
+  border-radius: 2px;
+  background-color: #ffffff;
+  transition: all .3s ease;
+}
+ul > li button:hover{
+  background-color: #dddddd;
+}
+.problem{
+  display: flex;
+  justify-content: space-evenly;
+}
+.description,.code-editor{
+  width: 50%;
+  height: 100vh;
+} 
+.description{
+ 
+  background-color: #B3E5FC;
+  color: #111111;
+  padding:1em;
+}
+.code-editor{
+  background-color:#003060;
+}
+.description h3{ 
+  font-size:  2em;
+  font-weight: 500;
+  margin-bottom: 2em;
+  text-align: center;
+}
