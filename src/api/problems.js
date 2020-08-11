@@ -4,3 +4,13 @@ export const getProblemList = () =>{
     .then(res => res.json());
    
 };
+export const postUserSoultion = (problemId,code)=>{
+    return fetch(`http://localhost:8000/problems/${problemId}`,{
+        method:'POST',
+        headers:{
+            'Content-Type':'application/json'
+        },
+        body:JSON.stringify({code})
+    }).then(res =>res.json());
+
+}

@@ -2,75 +2,63 @@ import React, { useState, useEffect } from 'react';
 //useEffect 
 import './App.css';
 import { getProblemList } from './api/problems';
-import CodeMirror from 'react-codemirror'
 
+import ProblemDetail from './ProblemDetail';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/mode/javascript/javascript';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-
-function ProblemDetail({ problem }) {
-  return (
-    <div className="problem">
-      <section className="description">
-        <h3>{problem.title}</h3>
-        <p>{problem.description}</p>
-      </section>
-      <section className ="code-editor">
-        <CodeMirror value ={'function solution(){}'}
-          options={{
-            mode: 'javascript'
-          }} />
-        <button>제출</button>
-      </section>
-    </div>
-  );
-}
 
 function App() {
 
   const [problems, setProblems] = useState([]);
-  const [selectedProblemId, setSelectedProblemId] = useState(null);
 
-  const [selectedProblem] = problems.filter(data => data.id === selectedProblemId);
+  
   useEffect(function () {
     async function getProblems() {
       const data = await getProblemList();
       setProblems(data);
     }
     getProblems();
-  },[]); // dependency..
+  }, []); // dependency..
 
   return (
+    <Router>
+      <div className="App">
+        <Route path="/" exact>
 
-    <div className="App">
-      { selectedProblemId === null &&
-      <>
-        <nav>
-          CODEWARS
+          <>
+            <nav>
+              CODEWARS
         </nav>
-        <ul>
-          {
-            problems.map(function (problem) {
-              return (<li key={problem.id}><h3>{problem.title}</h3>
-                <button onClick={() => setSelectedProblemId(problem.id)}>문제 풀기</button>
-              </li>
-              );
-            })
-          }
-        </ul>
-        
-        </>
-      
-        }
+            <ul>
+              {
+                problems.map(function (problem) {
+                  return (<li key={problem.id}><h3>{problem.title}</h3>
+                    <Link to={`/problems/${problem._id}`}>
+                      <button>문제 풀기</button>
+                    </Link>
 
-        {
-          selectedProblemId !== null &&
+                  </li>
+                  );
+                })
+              }
+            </ul>
 
-          <ProblemDetail problem={selectedProblem} />
-        }
-      
-    </div>
+          </>
 
+
+        </Route>
+        <Route path="/problems/:problem_id"
+          render={routerProps=>{
+            const problemId= routerProps.match.params.problem_id;
+            const [selectedProblem] = problems.filter(data => data._id === problemId);
+            return ( <ProblemDetail problem={selectedProblem} />);
+          }}>
+          
+        </Route>
+      </div>
+    </Router>
   );
 }
 
