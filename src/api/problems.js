@@ -1,6 +1,9 @@
+const API_URL = process.env.NODE_ENV == 'production'
+    ? 'http://codewars-env.eba-fmrv6mpd.ap-northeast-2.elasticbeanstalk.com'
+    :'http://localhost:8000/';
 
 export const getProblemList = () =>{
-    return fetch("http://localhost:8000/problems")
+    return fetch(`${API_URL}/problems`)
     .then(res => res.json());
    
 };
