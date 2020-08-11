@@ -1,4 +1,4 @@
-const API_URL = process.env.NODE_ENV == 'production'
+const API_URL = process.env.NODE_ENV === 'production'
     ? 'http://codewars-env.eba-fmrv6mpd.ap-northeast-2.elasticbeanstalk.com'
     :'http://localhost:8000/';
 
